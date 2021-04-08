@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TO DO app</title>
+    <style>
+        .header {
+      text-align: center;
+      color: white;
+      background-color: #189AB4;
+      padding: 12px;
+      opacity: 0.7;
+            }
+        body {
+          font: 15px Verdana;
+            }
+        .button {
+          font: 15px Verdana;
+          border: none;
+          color: white;
+          padding: 4px 12px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          margin: 4px 2px;
+          border-radius: 5px;
+            }
+        .button1 {background-color: #05445E;}
+        .button2 {background-color: green;}
+        .button3 {background-color: #810000;}
+        .button4 {background-color: orange;}
+        .center {
+        margin-left: auto;
+        margin-right: auto;
+            }
+        table {
+          border: 3px solid #189AB4;
+          border-collapse: collapse;
+          padding: 10px;
+          background-color: white;
+            }
+        td, th {
+           border: solid thin #189AB4;
+          padding: 10px;
+            }
+    </style>
+</head>
+<body style="background-color:#e1f7fb">
+    <h1 class="header"><strong>Do it now! ...or later?</strong></h1>
+    <form action="/add" method="post" accept-charset="UTF-8">
+        <div align="center">
+            <label> Enter task: </label>
+            <input type="text" name="task_name">
+            <button class="button button1" type="submit">Add</button>
+        </div>
+    </form>
+    <br>
+    <table class="center">
+        <tr>
+            <th>Status</th>
+            <th>Task name</th>
+            <th>Change status</th>
+            <th>Delete task</th>
+        </tr>
+
+        {% for task in incomplete %}
+        <tr>
+            <td><span style="color: red">To do</span></td>
+            <td style="width:50%"><span>{{ task.title }}</span></td>
+            <td><a class="button button2" href="/update/{{ task.id }}">Complete</a></td>
+            <td><a class="button button3" href="/delete/{{ task.id }}">Delete</a></td>
+
+        {% endfor %}
+
+        </tr>
+
+        {% for task in complete %}
+<!--        <tr style="background-color: #95e8b9">-->
+        <tr>
+            <td><span style="color: green">Done</span></td>
+            <td style="width:50%"><span>{{ task.title }}</span></td>
+            <td><a class="button button4" href="/update/{{ task.id }}">Incomplete</a></td>
+            <td><a class="button button3" href="/delete/{{ task.id }}">Delete</a></td>
+
+        {% endfor %}
+
+        </tr>
+    </table>
+</body>
+</html>
